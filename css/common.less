@@ -1,0 +1,50 @@
+.border-radius (@radius) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+}
+
+.textLine(@lineNum) {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: box;
+    display: -webkit-box;
+    line-clamp: @lineNum;
+    -webkit-line-clamp: @lineNum;
+    -webkit-box-orient: vertical;
+}
+
+.separateLine {
+    width: 85%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: #C8C7CC;
+}
+
+.separateLineSetWidth(@width) {
+    width: @width;
+    margin: 0 auto;
+    height: 1px;
+    background-color: #C8C7CC;
+    margin-bottom: 10px;
+}
+
+.setPlaceholder {
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+        font-size: 13px;
+    }
+    input:-moz-placeholder,
+    textarea:-moz-placeholder {
+        font-size: 13px;
+    }
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+        font-size: 13px;
+    }
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+        font-size: 13px;
+    }
+}

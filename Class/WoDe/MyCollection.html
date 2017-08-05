@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title></title>
+
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<!--less的引入一定要在script标签之前-->
+		<link rel="stylesheet" type="text/less" href="../../css/WoDe/MyCollection.less" />
+		<script src="../../js/less.js" type="text/javascript"></script>
+		<script type='application/javascript' src='../../js/fastclick.js'></script>
+		
+	</head>
+       
+	<body> 
+		<div class="container">
+			<div class="MyShopCollection"> 
+				我收藏的商家
+			</div>                                                                                
+			<ul> 
+				<li>     
+					<div class="left">
+						<img src="../../reaource/ceshi1.jpg" />                                             
+					</div>                                                                              
+					<div class="right">  
+						<p>涨占富师傅:12121</p>                
+						<p>电话:11232432</p>                 
+						<p>扬州石塔寺宾馆</p>                
+					</div>
+					<div class='separateLine'></div>
+				</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能,
+			});
+			
+			var app2 = new Vue({
+				el: ".container",
+				data: {
+					jifen: "111"
+					
+				},
+				methods: {
+					
+					
+				},
+				computed: {
+
+				},
+				watch: {
+
+				}
+			})
+		</script>
+	</body>
+<script type="text/javascript">
+			if('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+</html>

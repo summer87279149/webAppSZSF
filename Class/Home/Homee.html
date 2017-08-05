@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<!--引入vue-->
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!--引入mui-->
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<!--引入less-->
+		<link rel="stylesheet/less" href="../../css/Home.less" />
+		<script src="../../js/less.js" type="text/javascript"></script>
+		<!--引入jq-->
+		<script src="../../js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<!--下拉刷新容器
+					pullrefresh 和 listdata是下拉刷新组件默认的id
+					简单的调用没有必要修改
+				-->
+		<div id="pullrefresh">
+			{{jifen}}
+			<div >
+				<div>
+					
+					
+					<div id="bottomList">
+						<div id="woyaoruzhu">
+							我要入住
+						</div>
+					
+						<ul id="listView">
+							<li @click="a" class="cellItem" v-for="item in cellArr">
+								<div @click="a" class='left'><img src='../../reaource/ceshi1.jpg' /></div>
+								<div @click="a" class='right'><b>{{item.title}}</b>
+									<p>111服务热线:{{item.phone}}</p>
+									<p>门店地址:{{item.address}}</p>
+									<p>{{jifen}}经营范围：{{item.range}}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+	
+	<script type="text/javascript">
+		var app2 = new Vue({
+			el: "#pullrefresh",
+			data: {
+				jifen: "111",
+				base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII=',
+				cellArr: [{
+					title: '名字',
+					phone: '123456789',
+					address: 'dsaasasaa',
+					range: '理疗发肤得到的的疯狂时即将风剑封口机大是大非经营范围：理疗发嗲肌肤的疯狂时刻即将风刀霜剑封口大是大范理发肌肤的疯时刻即将风刀霜剑封口机大'
+				}]
+
+			},
+			methods: {
+				a(){
+					alert(1)
+				},
+				pullupRefresh() {
+					//						alert('vue 上啦')
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					this.cellArr.push({
+						title: '名字',
+						phone: '123456789',
+						address: 'dsaasasaa',
+						range: '理疗发肤得到的的疯狂时即将风剑封口机大是大非经营范围：理疗发嗲肌肤的疯狂时刻即将风刀霜剑封口大是大范理发肌肤的疯时刻即将风刀霜剑封口机大'
+					})
+					demoPullToRefresh.resetPullUpDown(false)
+				},
+				pulldownRefresh() {
+					//						alert('vue 下啦')
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						demoPullToRefresh.resetPullUpDown(true)
+					}, 1500);
+				},
+				cellClicked() {
+
+					this.pushto('TecDetail.html', "详情");
+				},
+				pushto(id, title) {
+					mui.openWindowWithTitle({
+						url: id,
+						id: id,
+						styles: {
+							top: '0px', //新页面顶部位置
+							bottom: '0px', //新页面底部位置
+
+						},
+					}, {
+						title: { //标题配置
+							text: title, //标题文字
+						},
+						back: { //左上角返回箭头
+							image: {
+								base64Data: this.base64Data
+							}
+						}
+					})
+				}
+			},
+			mounted: {
+
+			}
+		})
+	</script>
+<!--<script type="text/javascript" src="../../js/pulltorefresh.skin.default.js"></script>-->
+	<script type="text/javascript">
+		(function(exports) {
+
+			var pullToRefreshBiz,
+				pullToRefreshBase;
+
+			function initPullRefreshList(isAuto, disablePullDown, disablePullUp) {
+				//以下几个是测试加载更多,没有更多数据功能的
+				//当前页
+				var currpage = 0;
+				//每页大小
+				var pageSize = 10;
+				//总共大小，这里用来判断是否可以上拉加载
+				//实际业务中，可以不基于totalcount判断的，直接根据接口返回的数据进行判断
+				var totalCount = 21;
+				var pullToRefreshObj = new pullToRefreshBase({
+					//这里用默认设置
+					container: '#pullrefresh',
+					down: disablePullDown ? null : {
+						callback: pullDownRefreshCallback,
+						//是否显示成功动画
+						isSuccessTips: true,
+					},
+					//down为null表示不要下拉刷新
+					//down: null,
+					//上拉有关
+					up: disablePullUp ? null : {
+						//是否自动上拉加载-初始化是是否自动
+						auto: isAuto || false,
+
+						callback: pullUpRefreshCallback
+					},
+					scroll: {
+						bounceTime: 500, //回弹动画时间
+						//下拉刷新和上拉加载成功动画的时间
+						successAnimationTime: 500
+					},
+				});
+
+				function pullDownRefreshCallback() {
+					console.log("下拉刷新");
+
+					setTimeout(function() {
+						app2.pulldownRefresh()
+						//						resetState(true);
+					}, 1000);
+				}
+
+				function pullUpRefreshCallback() {
+					console.log("上拉加载");
+
+					setTimeout(function() {
+						app2.pullupRefresh()
+						//						resetState(false);
+					}, 500);
+
+				}
+
+				exports.resetPullUpDown = function resetState(isPullDown) {
+					if(isPullDown) {
+						pullToRefreshObj.endPullDownToRefresh();
+						if(pullToRefreshObj.finished) {
+							pullToRefreshObj.refresh(true);
+						}
+					} else {
+						pullToRefreshObj.endPullUpToRefresh(true);
+						pullToRefreshObj.refresh(true);
+					}
+
+				}
+
+			}
+
+			exports.init = function(pullToRefreshObj, disablePullDown, disablePullUp) {
+				pullToRefreshBase = pullToRefreshObj;
+				pullToRefreshBiz = initPullRefreshList(true, disablePullDown, disablePullUp);
+			};
+
+			window.demoPullToRefresh = exports;
+
+		})({});
+	</script>
+	<script>
+		window.onload = function() {
+			demoPullToRefresh.init(PullToRefreshTools.skin.defaults, false, false);
+		};
+	</script>
+
+</html>
