@@ -177,6 +177,8 @@
 								plus.nativeUI.toast(res['res']);
 								if(res['res']==='OK'){
 									mui.back()
+								}else{
+									that.pushto('../Login/login.html','登入')
 								}
 							}, function(err) {
 								plus.nativeUI.toast(err);
