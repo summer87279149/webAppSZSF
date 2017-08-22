@@ -1,0 +1,78 @@
+@import "../common.less";
+.container {
+    margin: 0;
+    padding-bottom: 44px;
+//  margin-bottom: 100px;
+    .mui-scroll{
+        padding-bottom: 120px;
+    }
+    .mui-card {
+//       padding-bottom: 60px;
+        .imgdiv {
+            width: 100%;
+            img {
+                width: 90%;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .info {
+            span:nth-of-type(2) {
+                color: gray;
+                text-decoration: line-through;
+            }
+        }
+    }
+    .cell{
+        line-height: 44px;
+        
+        img{
+            display: inline-block;
+            width: 25px;
+            vertical-align: middle;
+        }
+    }
+  
+}
+  .bottom {
+        position:fixed;
+        bottom:0;
+        width: 100%;
+        left: 0;
+        z-index: 1;
+        ul {
+            
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            list-style: none;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            li {
+                background-color: white;
+                font-size: 10px;
+                height: 44px;
+                flex: 1;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: flex-end;
+                flex-direction:column;
+                flex-wrap: nowrap;
+                text-align: center;
+                img{
+                    height: 20px;
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+            li:last-of-type{
+                flex: 5;
+                background-color: #fc5959;
+                line-height: 44px;
+            }
+        }
+    }

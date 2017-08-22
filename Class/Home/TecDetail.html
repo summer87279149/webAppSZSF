@@ -6,40 +6,52 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<title></title>
 
 		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
 		<script src="../../js/mui.min.js"></script>
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<!--less的引入一定要在script标签之前-->
 		<link rel="stylesheet" type="text/less" href="../../css/Home/TecDetail.less" />
 		<script src="../../js/less.js" type="text/javascript"></script>
-		<script type='application/javascript' src='js/fastclick.js'></script>
-		<script type="text/javascript">
-			if('addEventListener' in document) {
-				document.addEventListener('DOMContentLoaded', function() {
-					FastClick.attach(document.body);
-				}, false);
-			}
-		</script>
+		<script type='application/javascript' src='../../js/fastclick.js'></script>
+
+		<script src="../../js/request.js"></script>
+		<!--<script src="../../js/require.js" defer async="true" data-main="../../js/main" ></script>-->
+
+		<link rel="stylesheet" type="text/css" href="../../css/ImagePreview.css" />
+		<link href="../../css/mui.picker.min.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+
 	</head>
 
 	<body>
 		<div class="container">
-			<div class="topSupport">
+			<div class="topSupport" v-show="!isSupported">
 				<img src="../../reaource/ceshi1.jpg" />
 				<div>
 					<span>神州师傅</span>
 					<span>点击右侧为本店添加人气-----></span>
 				</div>
 
-				<div class="button">支持一下</div>
+				<div class="button" @click="addPopularity">支持一下</div>
 			</div>
 			<div class="shopInfo">
 				<div class="mui-slider">
-					<div class="mui-slider-group">
-						<div class="mui-slider-item">
-							<img class="banner" src="../../reaource/ceshi1.jpg" />
+					<div class="mui-slider-group ">
+						<div class="mui-slider-item ">
+							<div class="bannerWrapper">
+								<img class="banner" :src="banner" data-preview-src="" data-preview-group="1" />
+								<div class="btm">
+									<div class="laidian">
+										来店{{zhekou}}折
+									</div>
+									<div class="renqi">
+										人气:{{renqi}}
+									</div>
+								</div>
+							</div>
+
 						</div>
 
 					</div>
@@ -48,69 +60,193 @@
 				<ul class="mui-table-view">
 					<li class="mui-table-view-cell first ">
 						<div class="left">
-							<span class="detail">张占富师傅</span>
-							<span>上午上午上午上午上午上午上午上午上午午上午上午午上午上午上午午上午上午午上午上午上午午上午上午上午</span>
+							<span class="detail">{{name}}</span>
+							<span>上午{{swtime}}晚上{{xwtime}}</span>
 						</div>
 
 						<div class="right">
-							<img src="../../reaource/ceshi1.jpg" />
-							<span>3人收藏</span>
+							<img src="../../reaource/sc.png" />
+							<span>{{sc}}人收藏</span>
 						</div>
 
 					</li>
 					<li class="mui-table-view-cell second">
-						<span>电话12345678901</span>
-						<button type="button" class="mui-btn mui-btn-warning">拨打</button>
+						<span>电话:{{phone}}</span>
+						<a type="button" class="mui-btn mui-btn-warning" v-bind:href="call">拨打</a>
 					</li>
 					<li class="mui-table-view-cell third">
-						<span>地址：扬州石塔寺宾馆</span>
-						<img src="../../reaource/ceshi1.jpg" />
+						<span>地址：{{address}}</span>
+						<img src="../../reaource/dingwei.png" style="width: 18px;height: 25px;" />
 					</li>
 				</ul>
 			</div>
-			<div class="introduction"> 
+			<div class="introduction">
 				<ul class="mui-table-view">
-					
-						<div class="mui-card-header">本店介绍</div>
-					
-					<li class="mui-table-view-cell">
-						<img src="../../reaource/ceshi1.jpg" />
+
+					<div class="mui-card-header">本店介绍</div>
+
+					<li class="mui-table-view-cell" v-for="item in imgUrlArr">
+						<img :src="item" data-preview-src="" data-preview-group="2"/>
 					</li>
-					<li class="mui-table-view-cell">
-						<img src="../../reaource/ceshi1.jpg" />
-					</li>
-					<li class="mui-table-view-cell">
-						<img src="../../reaource/ceshi1.jpg" />
-					</li>
-					 
-				</ul>
-				
+				</ul> 
 			</div>
-
+			<!--商品--> 
+			<div class="mui-content goods" id="goods" style="background-color:#fff" v-show="goodsArr.length!==0">
+				<span >同城购物，到店付款，您买的更放心</span>
+				<ul class="mui-table-view mui-grid-view">
+					<li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goodsArr" @click="cellClicked(item.id)">
+							<img class="mui-media-object" src="'http://szsf.vxiaoxiao.com/'+item.fmimg">
+							<div class="mui-media-body">{{item.pname}}</div>
+							<div class="goShopPrice">到店价:{{item.price}}</div>
+							<div class="shopPrice">门店价:{{item.scprice}}</div>
+					</li>
+				</ul>  
+			</div>
+   
+			<div class="mui-content" id="loading" style="position: absolute;left: 0;right: 0;top: 0;bottom: 0; z-index: 10000;" v-show="shopid.length==0"></div>
 		</div>
+ 		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.poppicker.js"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
+		<script>
+			mui.previewImage();
+		</script>
 		<script type="text/javascript">
-			mui.init({
+			mui.init({ 
 				swipeBack: true, //启用右滑关闭功能,
-
 			});
 
 			var app2 = new Vue({
 				el: ".container",
 				data: {
-					jifen: "111"
-
+					isSupported: false,
+					shopid: '',
+					name: '',
+					phone: '',
+					banner: '',
+					swtime: '',
+					xwtime: '',
+					address: '',
+					sc: '',
+					call: '',
+					zhekou: '',
+					renqi: '',
+					contents: '',
+					goodsArr:[],
+					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
 				},
 				methods: {
+					cellClicked(cellId){
+						/*显示选择框
+						 * var that = this
+						var userPicker = new mui.PopPicker();
+						userPicker.setData([{
+							value: '1',
+							text: '到店付款'
+						}, {
+							value: '2',
+							text: '立即付款'
+						}]);
+						var that = this
+						userPicker.show(function(items) {
+							var obj = items[0]
+							switch(parseInt(obj.value)){
+								case 1:
+									alert(1)
+									break;
+								case 2:
+									alert(2)
+									break;
+							}
+						});*/
+						this.pushto('BuyGoods.html','商品详情',{
+							goodsId:cellId,
+							keFuDianHua:this.phone
+						})
+					},
+					addPopularity() {
+						this.isSupported = true
+						httprequest.addVisitNumber(this.shopid)
+					},
+					pushto(id, title,params) {
+						var a = Math.random().toString();
+						var b = Math.random().toString();
+						mui.openWindowWithTitle({
+							url: id,
+							id: id+a+b,
+							extras: params,
+							styles: {
+								top: '0px', //新页面顶部位置 
+								bottom: '0px', //新页面底部位置
+							},
+						}, {
+							title: { //标题配置
+								text: title, //标题文字
+							},
+							back: { //左上角返回箭头
+								image: {
+									base64Data: this.base64Data
+								}
+							}
+						})
+						
 
+						
+					}
 				},
 				computed: {
-
+					//本店介绍下面的图片数组处理
+					imgUrlArr() {
+						if(this.contents.length === 0) {
+							return ''
+						} else {
+							var regExp = /[src=\\"]{5}[^\s]*/g;
+							var arr = this.contents.match(regExp)
+							for(var i = 0; i < arr.length; ++i) {
+								arr[i] = arr[i].substring(6, arr[i].length - 1)
+								arr[i] = "http://szsf.vxiaoxiao.com/" + arr[i]
+							}
+							return arr
+						}
+					}
 				},
-				watch: {
-
-				}
+				mounted() {
+					var that = this
+					var self = plus.webview.currentWebview();
+					var shopId = self.shopId;//拿到传值
+					console.log('拿到的shopid是',shopId)
+					httprequest.getDetail(shopId,function(data) {
+						that.name = data.dpname
+						that.phone = data.tel
+						that.banner = data.shareimg
+						that.swtime = data.swtime
+						that.xwtime = data.xwtime
+						that.address = data.address
+						that.sc = data.sc
+						that.call = 'tel:' + data.tel
+						that.zhekou = data.zhekou
+						that.renqi = data.dj
+						that.contents = data.contents
+						that.shopid = data.id.toString()
+					})
+					httprequest.getGoodsOfShop(shopId,function(res){
+						console.log('商品数组:',res)
+//						that.goodsArr = res
+						that.goodsArr = [{},{}]
+					},function(err){
+						that.goodsArr = []
+					})
+				},
+				watch: {}
 			})
 		</script>
 	</body>
+	<script type="text/javascript">
+		if('addEventListener' in document) {
+			document.addEventListener('DOMContentLoaded', function() {
+				FastClick.attach(document.body);
+			}, false);}
+	</script>
 
-</html>
+</html> 

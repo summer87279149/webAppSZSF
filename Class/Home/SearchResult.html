@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title></title>
+		<!--引入vue-->
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!--引入mui-->
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<!--引入less-->
+		<link rel="stylesheet" type="text/less" href="../../css/Home/SearchResult.less" />
+		<script src="../../js/less.js" type="text/javascript"></script>
+		<!--引入fastclick-->
+		<script type='application/javascript' src='../../js/fastclick.js'></script>
+		<script type="text/javascript">
+			if('addEventListener' in document) {  
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script> 
+		
+	</head>
+
+	<body>
+
+		<div class="container"> 
+			<div id="noItemsHint" v-show="cellArr.length===0">无结果</div>
+			<ul id="listView">
+				<!--{{cellArr}}-->     
+				<li @click="cellClicked" class="cellItem" v-for="(item,index) in cellArr">
+					<div class='left'><img/></div>
+					<div class='right'><b>{{item.dpname}}</b>
+						<p>服务热线:{{item.tel}}</p>
+						<p>门店地址:{{item.address}}</p>
+						<p>经营范围：{{item.jyfw}}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script src="../../js/request.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能,
+
+			});
+
+			var app2 = new Vue({
+				el: ".container",
+				data: {
+					cellArr: [],
+					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
+				},
+				methods: {
+
+				},
+				computed: {
+
+				},
+				watch: {
+
+				},
+				mounted() {
+					var self = plus.webview.currentWebview();
+					var content = self.content;//拿到传值
+					
+					httprequest.search(content, function(data) {
+						alert('备忘：这个页面还没写完')
+						console.log('2', data)
+					}, function(err) {
+						consolo.log('1', err)
+					})
+				}
+			})
+		</script>
+	</body>
+
+</html>

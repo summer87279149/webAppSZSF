@@ -21,106 +21,126 @@
 		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<!--引入fastclick-->
 		<script src="../../js/fastclick.js" type="text/javascript" charset="utf-8"></script>
-
+		<!--引入图片查看器-->
+		<link rel="stylesheet" type="text/css" href="../../css/ImagePreview.css" />
 	</head>
 
 	<body>
 
 		<!--下拉刷新容器-->
-		<div id="pullrefresh" class="mui-scroll-wrapper">
+		<div id="pullrefresh" class="mui-scroll-wrapper bg">
 			<div class="mui-scroll">
-				<div class="mui-input-row mui-search" id="searchView">
-					<input type="search" class="mui-input-clear" placeholder="">
+				<div class="top">
+					<div class="img">
+						<img src="../../reaource/yangzhou.png" />
+					</div>
+
+					<!--javascript:functionWithAjax("search");-->
+					<form @submit.prevent="searchClicked">
+						<div class="mui-input-row mui-search" id="searchView">
+							<input type="search" class="mui-input-clear" placeholder="" v-model="searchContent">
+							<input type="submit" name="" id="" value="" />
+							<div class="searchLeft">
+								<img src="../../reaource/searchLeft.png" />
+							</div>
+							<div class="searchRight">
+								<img src="../../reaource/serachRight.png" />
+							</div>
+						</div>
+					</form>
+
 				</div>
+
 				<div id="slider" class="mui-slider">
 					<div class="mui-slider-group mui-slider-loop" id="slider2">
 						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 						<div class="mui-slider-item mui-slider-item-duplicate">
-							<a href="#">
-								<img src="../../reaource/ceshi1.jpg">
+							<a >
+								<img src="../../reaource/ceshi1.jpg" data-preview-src="" data-preview-group="1">
 							</a>
 						</div>
 						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 						<div class="mui-slider-item mui-slider-item-duplicate">
-							<a href="#">
-								<img src="../../reaource/ceshi1.jpg">
+							<a >
+								<img src="../../reaource/ceshi1.jpg" data-preview-src="" data-preview-group="1">
 							</a>
 						</div>
 					</div>
 				</div>
 				<div class="mid">
 					<ul class="mui-table-view mui-grid-view mui-grid-9">
-						<li @click="cellClicked" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(1)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/3.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">漆器</div>
 							</a>
 						</li>
-						<li @click="a" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(2)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/7.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">玉器</div>
 							</a>
 						</li>
-						<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(3)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/6.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">琴筝</div>
 							</a>
 						</li>
-						<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(4)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/13.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">盆景</div>
 							</a>
 						</li>
-						<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(5)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/9.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">厨艺</div>
 							</a>
 						</li>
-						<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(6)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/14.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">脚艺</div>
 							</a>
 						</li>
-						<li @click="cellClicked" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(7)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/10.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">剪纸</div>
 							</a>
 						</li>
-						<li @click="cellClicked" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a href="#">
-								<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg" style="width: 40px;height: 40px;">
+						<li @click="pushToCatagory(8)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+							<a >
+								<img class="mui-icon mui-icon-location" src="../../reaource/5.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">刺绣</div>
 							</a>
 						</li>
 					</ul>
 				</div>
 				<div id="bottomList">
-					<div id="woyaoruzhu">
-						我要入住
-					</div>
+					<!--<div id="woyaoruzhu">
+						我要入住 
+					</div>-->
 					<div class="mui-content">
 						<div id="slider" class="mui-slider ">
 							<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+								<img class="hengxian" src="../../reaource/hengxian.png" />
 								<div class="mui-scroll">
-									<a class="mui-control-item mui-active" href="#item1mobile">
+
+									<a class="mui-control-item mui-active" @click="getHotShops(0)">
 										热门
 									</a>
-									<a class="mui-control-item" href="#item2mobile">
+									<a class="mui-control-item" @click="getNewShops(0)">
 										新人
 									</a>
-									<a class="mui-control-item" href="#item3mobile">
+									<a class="mui-control-item" @click="getNearShops(0)">
 										附近
 									</a>
-									<a class="mui-control-item" href="#item4mobile">
+									<a class="mui-control-item" @click="getEvents">
 										活动
 									</a>
-
 								</div>
 							</div>
 
@@ -128,12 +148,13 @@
 					</div>
 
 					<ul id="listView">
-						<li @click="cellClicked" class="cellItem" v-for="(item,index) in cellArr">
-							<div class='left'><img src='../../reaource/ceshi1.jpg' /></div>
-							<div class='right'><b>{{item.title}}</b>
-								<p>111服务热线:{{item.phone}}</p>
+						<!--{{cellArr}}-->
+						<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
+							<div class='left'><img :src="dealFMImg(item.fmimg)" /></div>
+							<div class='right'><b>{{item.dpname}}</b>
+								<p>服务热线:{{item.tel}}</p>
 								<p>门店地址:{{item.address}}</p>
-								<p>{{jifen}}经营范围：{{item.range}}</p>
+								<p>经营范围：{{item.jyfw}}</p>
 							</div>
 
 						</li>
@@ -142,6 +163,12 @@
 
 			</div>
 		</div>
+		<script src="../../js/request.js"></script>
+			<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
+		<script>
+			mui.previewImage();
+		</script>
 		<script>
 			$(function() {
 				FastClick.attach(document.body);
@@ -171,46 +198,145 @@
 			var app2 = new Vue({
 				el: "#pullrefresh",
 				data: {
-					jifen: "111",
+					searchContent: '',
+					currentShopsType: 0, //当前选择的类型 热门：0，新人：1，附近：2
+					page: 0,
 					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII=',
-					cellArr: [{
-						title: '名字',
-						phone: '123456789',
-						address: 'dsaasasaa',
-						range: '理疗发肤得到的的疯狂时即将风剑封口机大是大非经营范围：理疗发嗲肌肤的疯狂时刻即将风刀霜剑封口大是大范理发肌肤的疯时刻即将风刀霜剑封口机大'
-					}]
+					cellArr: []
 
 				},
-				methods: {
-					a() {
-						alert(1)
+				methods: { 
+					pushToCatagory(e){
+						this.pushto('Catagory/Catagory.html', "分类店铺",{
+							shopCatagory:e.toString()
+						});
+					},
+					searchClicked() {
+//页面传值
+						this.pushto('SearchResult.html', "搜索结果",{
+							content:this.searchContent
+						});
+
+					},
+					dealFMImg(fmimg) {
+						return 'http://szsf.vxiaoxiao.com/' + fmimg
+					},
+					getHotShops(page) {
+
+						if(page == 0) {
+							this.page = page;
+							this.cellArr = [];
+						}
+
+						console.log('当前page:', this.page)
+						this.currentShopsType = 0;
+						var that = this
+						httprequest.getHotShops(page, function(data) {
+							data.forEach(function(item) {
+								that.cellArr.push(item)
+
+							})
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						}, function(err) {
+							console.log('错误是', err)
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						})
+					},
+					getNewShops(page) {
+						if(page == 0) {
+							this.page = page;
+							this.cellArr = [];
+						}
+						this.currentShopsType = 1;
+						var that = this
+						httprequest.getNewShops(page, function(data) {
+							data.forEach(function(item) {
+								that.cellArr.push(item)
+							})
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						}, function(err) {
+							console.log('错误是', err)
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						})
+
+					},
+					getNearShops(page) {
+						if(page == 0) {
+							this.page = page;
+							this.cellArr = [];
+						}
+						this.currentShopsType = 2;
+						var that = this
+						plus.geolocation.getCurrentPosition(function(p) {
+							console.log("经纬度是", p.coords.latitude)
+							var location = p.coords.latitude.toString() + "," + p.coords.longitude.toString()
+							httprequest.getNearShops(page, location, function(data) {
+								data.forEach(function(item) {
+									that.cellArr.push(item)
+								})
+								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+							}, function(err) {
+								console.log('错误是', err)
+								mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+							})
+						}, function(e) {
+							alert('地理位置错误: ' + e.message);
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+						});
+
+					},
+					getEvents() {
+						this.page = 0;
+						this.cellArr = [];
+						this.currentShopsType = 3;
 					},
 					pullupRefresh() {
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-						this.cellArr.push({
-							title: '名字',
-							phone: '123456789',
-							address: 'dsaasasaa',
-							range: '理疗发肤得到的的疯狂时即将风剑封口机大是大非经营范围：理疗发嗲肌肤的疯狂时刻即将风刀霜剑封口大是大范理发肌肤的疯时刻即将风刀霜剑封口机大'
-						})
+						switch(this.currentShopsType) {
+							case 0:
+								this.page++
+									this.getHotShops(this.page)
+								break;
+							case 1:
+								this.page++
+									this.getNewShops(this.page)
+								break;
+							case 2:
+								this.page++
+									this.getNearShops(this.page)
+								break; 
+							case 3:
+								break;
+						}
 					},
 					pulldownRefresh() {
-						setTimeout(function() {
-							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-						}, 1500);
+						switch(this.currentShopsType) {
+							case 0:
+								this.getHotShops(0)
+								break;
+							case 1:
+								this.getNewShops(0)
+								break;
+							case 2:
+								this.getNearShops(0)
+								break;
+							case 3:
+								break;
+						}
 					},
-					cellClicked() {
-
-						this.pushto('TecDetail.html', "详情");
+					cellClicked(shopId) {
+						this.pushto('TecDetail.html', "分类店铺",{
+							shopId:shopId.toString()
+						});
 					},
-					pushto(id, title) {
+					pushto(id, title,params) {
 						mui.openWindowWithTitle({
 							url: id,
 							id: id,
+							extras: params,
 							styles: {
-								top: '0px', //新页面顶部位置
+								top: '0px', //新页面顶部位置 
 								bottom: '0px', //新页面底部位置
-
 							},
 						}, {
 							title: { //标题配置
@@ -229,9 +355,14 @@
 				},
 				watch: {
 
+				},
+				mounted() {
+					this.getHotShops(0)
 				}
+
 			})
 		</script>
+
 	</body>
 
 </html>

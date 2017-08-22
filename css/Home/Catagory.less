@@ -1,0 +1,110 @@
+@import "../common.less";
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: url(../../reaource/bg.jpg) no-repeat border-box fixed;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    .top {
+        position: relative;
+        width: 100%;
+        height: 44px;
+        .img {
+            width: 15%;
+            margin-left: 10px;
+            margin-top: 10px;
+            float: left;
+            img {
+                width: 100%;
+            }
+        }
+        #searchView {
+            //      margin-top: 5px;
+            //      margin-bottom: 5px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -40%);
+            width: 70%;
+            margin-left: 20%;
+            height: 100%;
+            input {
+                height: 80%;
+            }
+            .searchLeft {
+                position: absolute;
+                top: 0;
+                width: 35px;
+                height: 35px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .searchRight {
+                position: absolute;
+                width: 35px;
+                height: 35px;
+                right: 0;
+                bottom: 10px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+    .content {
+        #sliderSegmentedControl {
+            .mui-scroll {
+                display: flex;
+                display: -webkit-flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+                height: 80px;
+                .mui-active {
+                    color: red;
+                }
+            }
+        }
+        #listView2 {
+            padding: 0;
+            list-style: none;
+            position: relative;
+            .cellItem {
+                .left {
+                    padding: 0;
+                    margin: 5px;
+                    img {
+                        float: left;
+                        width: 100px;
+                        height: 100px;
+                    }
+                }
+                .right {
+                    margin-top: 5px;
+                    margin-left: 110px;
+                    p {
+                        padding: 0;
+                        margin: 0;
+                        font-size: 13px;
+                        .textLine(2);
+                    }
+                }
+            }
+        }
+    }
+    .noItemsHint {
+        color: gray;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}
