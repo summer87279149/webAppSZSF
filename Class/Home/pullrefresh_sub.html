@@ -234,12 +234,13 @@
 						httprequest.getHotShops(page, function(data) {
 							data.forEach(function(item) {
 								that.cellArr.push(item)
-
 							})
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(); 
 						}, function(err) {
 							console.log('错误是', err)
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(); 
 						})
 					},
 					getNewShops(page) {
@@ -329,10 +330,12 @@
 							shopId:shopId.toString()
 						});
 					},
-					pushto(id, title,params) {
+					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Math.random().toString();
 						mui.openWindowWithTitle({
 							url: id,
-							id: id,
+							id: id + a + b,
 							extras: params,
 							styles: {
 								top: '0px', //新页面顶部位置 
@@ -348,7 +351,8 @@
 								}
 							}
 						})
-					}
+
+					}	
 				},
 				computed: {
 

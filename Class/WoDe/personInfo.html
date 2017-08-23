@@ -14,25 +14,25 @@
 		<!--less的引入一定要在script标签之前-->
 		<link rel="stylesheet" type="text/less" href="../../css/WoDe/personInfo.less" />
 		<script src="../../js/less.js" type="text/javascript"></script>
-		 <script type='application/javascript' src='../../js/fastclick.js'></script>
-		 
+		<script type='application/javascript' src='../../js/fastclick.js'></script>
+
 	</head>
 
 	<body>
 		<div class="mui-content" id="container">
-		<ul class="mui-table-view">
-			<li class="mui-table-view-cell first" @click="changePortrait"><span>头像</span>
-				<img src="../../reaource/ceshi1.jpg" /></li>
-			<li class="mui-table-view-cell "><span>昵称</span></li>
-			<li class="mui-table-view-cell"><span>性别</span></li>
-			<li class="mui-table-view-cell"><span>所在地</span></li>
-			<li class="mui-table-view-cell"><span>手机号</span></li>
-			<li class="mui-table-view-cell"><span>QQ</span></li>
-			<li class="mui-table-view-cell"><span>微信</span></li>
-			<li class="mui-table-view-cell"><span>新浪微博</span></li>
-		</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell first" @click=""><span>头像</span>
+					<img :src="userInfo.Client_HeadImgUrl" /></li>
+				<li class="mui-table-view-cell "><span>昵称</span> <span style="float: right;">{{userInfo.Client_NickName}}</span></li>
+				<!--<li class="mui-table-view-cell"><span>性别</span><span>{{userInfo.Client_Sex}}</span></li>
+				<li class="mui-table-view-cell"><span>所在地</span><span>{{userInfo.Client_Province}}{{userInfo.Client_City}}</span></li>-->
+				<li class="mui-table-view-cell"><span>手机号</span><span>{{userInfo.Tel_No}}</span></li>
+				<!--<li class="mui-table-view-cell"><span>QQ</span><span>{{userInfo.}}</span></li>
+			<li class="mui-table-view-cell"><span>微信</span><span >{{userInfo.}}</span></li>
+			<li class="mui-table-view-cell"><span>新浪微博</span><span>{{userInfo.}}</span></li>-->
+			</ul>
 
-		</div>    
+		</div>
 		<script type="text/javascript">
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能,
@@ -54,46 +54,55 @@
 			var app2 = new Vue({
 				el: "#container",
 				data: {
-					jifen: "111"
-					
+					jifen: "111",
+					userInfo: {},
+					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
 				},
 				methods: {
 					changePortrait() {
+//						alert(2)
+						this.pushto('EditPortrait.html','修改信息',{userInfo:this.userInfo})
+					},
+					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Date.parse(new Date()).toString();
 						mui.openWindowWithTitle({
-							url: 'EditPortrait.html',
-							id: 'EditPortrait.html',
+							url: id,
+							id: id + a + b,
+							extras: params,
 							styles: {
-								top: '0px', //新页面顶部位置
+								top: '0px', //新页面顶部位置 
 								bottom: '0px', //新页面底部位置
-
 							},
 						}, {
 							title: { //标题配置
-								text: "编辑个人资料", //标题文字
+								text: title, //标题文字
 							},
 							back: { //左上角返回箭头
 								image: {
-									base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
+									base64Data: this.base64Data
 								}
 							}
 						})
-						
+
 					}
 				},
-				computed: {
+				computed: { 
 
 				},
-				watch: {
-
+				mounted() {
+					var self = plus.webview.currentWebview();
+					this.userInfo = self.userInfo;
 				}
 			})
 		</script>
 	</body>
 	<script type="text/javascript">
-			if('addEventListener' in document) {
-				document.addEventListener('DOMContentLoaded', function() {
-					FastClick.attach(document.body);
-				}, false);
-			}
-		</script> 
+		if('addEventListener' in document) {
+			document.addEventListener('DOMContentLoaded', function() {
+				FastClick.attach(document.body);
+			}, false);
+		}
+	</script>
+
 </html>

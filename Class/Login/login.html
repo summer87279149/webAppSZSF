@@ -193,6 +193,19 @@
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
 		<script type="text/javascript">
+			mui.init({
+			swipeBack: true, //启用右滑关闭功能,
+			beforeback: function() {
+				console.log("beforeback22")
+				//获得列表界面的webview
+				var list = plus.webview.getWebviewById('Class/WoDe/WoDe.html');
+				console.log(list.id)
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				mui.fire(list, 'refresh');
+				//返回true，继续页面关闭逻辑
+				return true;
+			}
+		});
 			Vue.component('timerBtn', {
 				template: '<button  v-on:click="run" :disabled="disabled || time > 0">{{ text }}</button>',
 				props: {

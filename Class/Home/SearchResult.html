@@ -18,22 +18,22 @@
 		<!--引入fastclick-->
 		<script type='application/javascript' src='../../js/fastclick.js'></script>
 		<script type="text/javascript">
-			if('addEventListener' in document) {  
+			if('addEventListener' in document) {
 				document.addEventListener('DOMContentLoaded', function() {
 					FastClick.attach(document.body);
 				}, false);
 			}
-		</script> 
-		
+		</script>
+
 	</head>
 
 	<body>
 
-		<div class="container"> 
+		<div class="container">
 			<div id="noItemsHint" v-show="cellArr.length===0">无结果</div>
 			<ul id="listView">
-				<!--{{cellArr}}-->     
-				<li @click="cellClicked" class="cellItem" v-for="(item,index) in cellArr">
+				<!--{{cellArr}}-->
+				<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
 					<div class='left'><img/></div>
 					<div class='right'><b>{{item.dpname}}</b>
 						<p>服务热线:{{item.tel}}</p>
@@ -57,7 +57,41 @@
 					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
 				},
 				methods: {
+					dealFMImg(fmimg) {
+						return 'http://szsf.vxiaoxiao.com/' + fmimg
+					},
 
+					cellClicked(shopId) {
+						var sid = shopId.toString()
+						//						alert(sid)
+						this.pushto('TecDetail.html', "分类店铺", {
+							shopId: sid
+						});
+					},
+
+					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Math.random().toString();
+						mui.openWindowWithTitle({
+							url: id,
+							id: id + a + b,
+							extras: params,
+							styles: {
+								top: '0px', //新页面顶部位置 
+								bottom: '0px', //新页面底部位置
+							},
+						}, {
+							title: { //标题配置
+								text: title, //标题文字
+							},
+							back: { //左上角返回箭头
+								image: {
+									base64Data: this.base64Data
+								}
+							}
+						})
+
+					}
 				},
 				computed: {
 
@@ -67,11 +101,11 @@
 				},
 				mounted() {
 					var self = plus.webview.currentWebview();
-					var content = self.content;//拿到传值
-					
+					var content = self.content; //拿到传值
+
 					httprequest.search(content, function(data) {
-						alert('备忘：这个页面还没写完')
-						console.log('2', data)
+//						alert('备忘：这个页面还没写完')
+//						console.log('2', data)
 					}, function(err) {
 						consolo.log('1', err)
 					})

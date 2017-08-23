@@ -55,7 +55,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -76,7 +81,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -95,7 +105,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -108,7 +123,12 @@
 		},
 		addVisitNumber: function(shopid, suc, err) {
 			mui.ajax(rooturl + 'api/dp/UpdatedpDJAdd1/' + shopid, {
-				putConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'put', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -128,7 +148,12 @@
 					$skip: pageNumber,
 					dpname: '张师傅'
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -147,7 +172,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber,
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -166,7 +196,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber,
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					console.log(data)
 					suc(data)
@@ -188,7 +223,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber,
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					//					alert(1)
 					console.log(data)
@@ -211,7 +251,12 @@
 					$top: perPageNumbers,
 					$skip: pageNumber,
 				},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					suc(data)
 				},
@@ -224,7 +269,12 @@
 			var url = ceshiurl + 'api/good/' + 23
 			mui.ajax(url, {
 				data: {},
-				getConfig,
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				success: function(data) {
 					suc(data)
 				},
@@ -233,8 +283,8 @@
 				}
 			});
 		},
-		buyGoods:function(data,token,suc,err){
-			var url = ceshiurl + 'api/good/Addshop_orderlist?token='+token
+		buyGoods: function(data, token, suc, err) {
+			var url = ceshiurl + 'api/good/Addshop_orderlist?token=' + token
 			mui.ajax(url, {
 				data: data,
 				dataType: 'json', //服务器返回json格式数据
@@ -277,23 +327,9 @@
 			});
 
 		},
-		refreshToken:function(token,suc,err){
+		refreshToken: function(token, suc, err) {
 			var url = ceshiurl + 'api/client/refreshToken?token=' + token
 			mui.ajax(url, {
-				postConfig,
-				success: function(data) {
-					suc(data)
-				},
-				error: function(xhr, type, errorThrown) {
-					err(errorThrown)
-				}
-			});
-		}
-		,
-		getSmsCode: function(tel, suc, err) {
-			var url = ceshiurl + 'api/sms/register'
-			mui.ajax(url, {
-				data:{tel},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'post', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -301,12 +337,30 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					//					alert(1)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					err(errorThrown)
+				}
+			});
+		},
+		getSmsCode: function(tel, suc, err) {
+			var url = ceshiurl + 'api/sms/register'
+			mui.ajax(url, {
+				data: {
+					tel
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					//					alert(3)
 					console.log(type);
 					err(errorThrown)
 				}
@@ -326,12 +380,12 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-//										alert(data)
+					//										alert(data)
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-//					alert(errorThrown)
+					//					alert(errorThrown)
 					console.log(type);
 					err(errorThrown)
 				}
@@ -362,7 +416,102 @@
 					err(errorThrown)
 				}
 			});
-		}
+		},
+		getMyInfo: function(token, suc, err) {
+			var url = ceshiurl + 'api/client/Getclient?token=' + token
+
+			mui.ajax(ceshiurl + 'api/client/Getclient?token=' + token, {
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},
+		//还没写完，注意data用的是测试数据
+		modifyMyInfo: function(token, data, suc, err) {
+			mui.ajax(ceshiurl + 'api/client/UpdateclientAddressInfo?token=' + token, {
+				data: {
+					"Client_RealName": "张三",
+					"zstel": "13777878576",
+					"Client_Address": "测试地址"
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'put', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},
+		getMyCollection: function(page, token, suc, err) {
+			var perPageNumbers = 10;
+			var pageNumber = page * 10;
+			var url = ceshiurl + 'api/client/Getdpshoucanglist?token=' + token
+			console.log('wooca',url)
+//			alert(url)
+			mui.ajax(ceshiurl + 'api/client/Getdpshoucanglist?token=' + token, {
+				data: {
+					$top: perPageNumbers,
+					$skip: pageNumber,
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},
+		getMyOrderToShop: function(page, token, suc, err) {
+			var perPageNumbers = 10;
+			var pageNumber = page * 10;
+			mui.ajax(ceshiurl + 'api/client/Getshop_orderlist?token=' + token, {
+				data: {
+					$top: perPageNumbers,
+					$skip: pageNumber,
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},
 
 	}
 

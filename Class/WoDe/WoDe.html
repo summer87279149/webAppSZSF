@@ -26,13 +26,13 @@
 						<img id="wode" class="mui-icon mui-icon-location" src="../../reaource/My.png">
 					</div>
 					<div class="img" @click="changPortrait">
-						<img class="mui-icon mui-icon-location" src="../../reaource/ceshi1.jpg">
-					</div> 
-					<div class="jifencontainer">
-						<button type="button" class="mui-btn">积分:{{jifen}}</button> 
-						<button type="button" class="mui-btn mui-btn-danger">签到得积分</button>
+						<img class="mui-icon mui-icon-location" :src="userInfo.Client_HeadImgUrl">
 					</div>
-				</div> 
+					<div class="jifencontainer">
+						<button type="button" class="mui-btn">积分:{{userInfo.Client_jf}}</button>
+						<button @click="getJifen" type="button" class="mui-btn mui-btn-danger">签到得积分</button>
+					</div>
+				</div>
 				<!--<div class="midline"></div>-->
 				<div class="bottom">
 					<ul class="mui-table-view">
@@ -101,7 +101,6 @@
 
 				</div>-->
 				</div>
-
 			</div>
 			<div class="feedbackView" v-show="showDeedbackView">
 				<transition name="fade">
@@ -138,69 +137,112 @@
 			var app2 = new Vue({
 				el: "#container",
 				data: {
+					userInfo: {},
 					showDeedbackView: false,
-					jifen: "111",
+					jifen: "0",
 					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
 				},
 				methods: {
+					getJifen() {
+
+					},
 					joinUs() {
 						this.pushto('JoinUs.html', "商家入驻");
 						//						alert(1)
-//						var that = this
-//						
-//						var userPicker = new mui.PopPicker();
-//						userPicker.setData([{
-//							value: '0',
-//							text: '个人入驻'
-//						}, {
-//							value: '1',
-//							text: '商家入驻'
-//						}]);
-//						
-//						userPicker.show(function(items) {
-//							var obj = items[0]
-////							alert(obj.value)
-//							switch(obj.value) {
-//								case 0:
-//									that.pushto('JoinUs.html', "个人入驻");
-//									break;
-//								case 1:
-//									that.pushto('JoinUs.html', "商家入驻");
-//									break;
-//								default:
-//									break;
-//							}
-//						});
+						//						var that = this
+						//						
+						//						var userPicker = new mui.PopPicker();
+						//						userPicker.setData([{
+						//							value: '0',
+						//							text: '个人入驻'
+						//						}, {
+						//							value: '1',
+						//							text: '商家入驻'
+						//						}]);
+						//						
+						//						userPicker.show(function(items) {
+						//							var obj = items[0]
+						////							alert(obj.value)
+						//							switch(obj.value) {
+						//								case 0:
+						//									that.pushto('JoinUs.html', "个人入驻");
+						//									break;
+						//								case 1:
+						//									that.pushto('JoinUs.html', "商家入驻");
+						//									break;
+						//								default:
+						//									break;
+						//							}
+						//						});
 					},
 					FeedBack() {
-						this.showDeedbackView = true
+						if(this.checkIsLogin()) {
+							this.showDeedbackView = true
+						}
+
 						//						this.pushto('FeedBack.html', "意见反馈");
 					},
-					MyWallet() {
-						this.pushto('MyWallet.html', "我的钱包");
-					},
-					ReceiveInfo() {
-						this.pushto('ReceiveInfo.html', "收件信息");
-					},
-					MyOrder() {
-						this.pushto('MyOrder.html', "我的订单");
-					},
-					MyCollection() {
-						this.pushto('MyCollection.html', "我的收藏");
-					},
-					changPortrait() {
-						this.pushto('personInfo.html', "商品详情");
+					checkIsLogin() {
+						var foo = plus.storage.getItem('szsftoken');
+						if(foo == null) {
+							this.pushto('../Login/login.html', "登入");
+							return false
+						} else {
+							return true
+						}
 
 					},
+					MyWallet() {
+						if(this.checkIsLogin()) {
+							this.pushto('MyWallet.html', "我的钱包");
+						}
+
+					},
+					ReceiveInfo() {
+						if(this.checkIsLogin()) {
+							this.pushto('ReceiveInfo.html', "收件信息");
+						}
+
+					},
+					MyOrder() {
+						if(this.checkIsLogin()) {
+							this.pushto('MyOrder.html', "我的订单");
+						}
+
+					},
+					MyCollection() {
+						if(this.checkIsLogin()) {
+							this.pushto('MyCollection.html', "我的收藏");
+						}
+
+					},
+					changPortrait() {
+						if(this.checkIsLogin()) {
+							this.pushto('personInfo.html', "我的信息", {
+								userInfo: this.userInfo
+							});
+						}
+
+					},
+					getMyInfo(foo) {
+						var that = this
+						httprequest.getMyInfo(foo, function(res) {
+							that.userInfo = res;
+						}, function(err) {
+							plus.nativeUI.toast('请检查网络');
+							mui.back();
+						})
+					},
 					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Date.parse(new Date()).toString();
 						mui.openWindowWithTitle({
 							url: id,
-							id: id,
+							id: id + a + b,
 							extras: params,
 							styles: {
 								top: '0px', //新页面顶部位置 
 								bottom: '0px', //新页面底部位置
-
 							},
 						}, {
 							title: { //标题配置
@@ -212,6 +254,14 @@
 								}
 							}
 						})
+
+					}
+				},
+				mounted() {
+					var foo = plus.storage.getItem('szsftoken');
+					if(foo == null) {
+					} else {
+						this.getMyInfo(foo);
 					}
 				}
 			})

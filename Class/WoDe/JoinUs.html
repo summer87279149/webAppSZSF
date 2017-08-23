@@ -192,14 +192,16 @@
 							//							alert(that.hy)
 						});
 					},
-					pushto(id, title) {
+					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Date.parse(new Date()).toString();
 						mui.openWindowWithTitle({
 							url: id,
-							id: id,
+							id: id + a + b,
+							extras: params,
 							styles: {
-								top: '0px', //新页面顶部位置
+								top: '0px', //新页面顶部位置 
 								bottom: '0px', //新页面底部位置
-
 							},
 						}, {
 							title: { //标题配置
@@ -211,6 +213,7 @@
 								}
 							}
 						})
+
 					}
 				},
 				computed: {
