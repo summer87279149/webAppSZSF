@@ -74,24 +74,29 @@ body {
     position: relative;
     .cellItem {
         border-bottom: solid 1px lightgray;
-        height: 100px;
+        height: 110px;
+        position: relative;
         .left {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -60%);
             margin-top: 10px;
             margin-left: 10px;
-//          background-color: red;
+            //          background-color: red;
             padding: 0;
             img {
                 width: 80px;
                 display: block;
                 height: 80px;
                 margin: 0 auto;
-               
             }
         }
         .right {
-//          background-color: palegoldenrod;
-            
+            //          background-color: palegoldenrod;
             margin-left: 5px;
+            b{
+                .textLine(1);
+            }
             p {
                 padding: 0;
                 margin: 0;
@@ -101,16 +106,17 @@ body {
         }
     }
 }
-.noRecord{
+
+.noRecord {
     background-color: transparent;
     color: gray;
     font-size: 0.875rem;
     position: absolute;
     width: 50%;
     height: 200px;
-    top:50%;
+    top: 50%;
     left: 25%;
     transform: translateY(-50%);
     text-align: center;
-//  transform: translateX(-50%);
+    //  transform: translateX(-50%);
 }

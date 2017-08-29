@@ -35,12 +35,12 @@
 	</head> 
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-nav" style="display: none;">
 			<a class="mui-action-back mui-icon  mui-pull-left"></a>
 			<h1 id="title" class="mui-title">首页</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab" id="container">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="Class/Home/Home.html">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="Class/Home/pullrefresh_sub.html">
 				<!--<span class="mui-icon mui-icon-home"></span>-->
 				<img class="mui-icon yellowColor" src="reaource/Tab-shouye.png"  />
 				<span class="mui-tab-label">首页</span>
@@ -69,9 +69,9 @@
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
 			mui.init();
-			var subpages = ['Class/Home/Home.html', 'Class/HaoDian/HaoDian.html', 'Class/MingShi/MingShi.html', /*'Class/ShangChang/ShangChang.html', */'Class/WoDe/WoDe.html'];
+			var subpages = ['Class/Home/pullrefresh_sub.html', 'Class/HaoDian/HaoDian.html', 'Class/MingShi/MingShi.html', /*'Class/ShangChang/ShangChang.html', */'Class/WoDe/WoDe.html'];
 			var subpage_style = {
-				top: '45px',
+				top: '0px',
 				bottom: '51px'
 			};
 

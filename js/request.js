@@ -24,7 +24,7 @@
 		}
 	}
 	var rooturl = 'http://36.111.195.164:9081/';
-	var ceshiurl = 'http://onquery.natapp1.cc/'
+	var ceshiurl = 'http://36.111.195.164:9081/'
 	var httprequest = {
 		getDetail: function(shopid, suc, err) {
 			console.log('请求题里面shopid是', shopid)
@@ -42,14 +42,14 @@
 				error: function(xhr, type, errorThrown) {
 					//异常处理；
 					console.log(type);
-					err(errorThrown)
+//					err(errorThrown)
 				}
 			});
 		},
 		getNearShops: function(page, location, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			mui.ajax(rooturl + 'api/dp/GetdpsNear', {
+			mui.ajax(rooturl + 'api/dp/GetdpsNear'+'?$top='+perPageNumbers+'&$skip='+pageNumber+'&location='+location, {
 				data: {
 					location: location,
 					$top: perPageNumbers,
@@ -62,7 +62,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					console.log(data)
+					console.log('data=',data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
@@ -75,12 +75,11 @@
 		getHotShops: function(page, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			//			alert(pageNumber)
-			mui.ajax(rooturl + 'api/dp/GetdpsHot', {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber
-				},
+			mui.ajax(rooturl + 'api/dp/GetdpsHot'+'?$top='+perPageNumbers+'&$skip='+pageNumber, {
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -100,11 +99,11 @@
 		getNewShops: function(page, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			mui.ajax(rooturl + 'api/dp/GetdpsNew', {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber
-				},
+			mui.ajax(rooturl + 'api/dp/GetdpsNew'+'?$top='+perPageNumbers+'&$skip='+pageNumber, {
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -142,10 +141,10 @@
 		search: function(content, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = 0 * 10;
-			mui.ajax(rooturl + 'api/dp/Querydp', {
+			mui.ajax(rooturl + 'api/dp/Querydp'+'?$top='+perPageNumbers+'&$skip='+pageNumber, {
 				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
 					dpname: '张师傅'
 				},
 				dataType: 'json', //服务器返回json格式数据
@@ -167,11 +166,11 @@
 		getHotShopsCatagory(catagoryID, page, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			mui.ajax(rooturl + 'api/dp/' + catagoryID + '/GetdpsHotBydptype', {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+			mui.ajax(rooturl + 'api/dp/' + catagoryID + '/GetdpsHotBydptype'+'?$top='+perPageNumbers+'&$skip='+pageNumber, {
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -179,7 +178,7 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					console.log(data)
+					console.log('返回时：',data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
@@ -191,11 +190,11 @@
 		getNewShopsCatagory(catagoryID, page, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			mui.ajax(rooturl + 'api/dp/' + catagoryID + '/GetdpsNewBydptype', {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+			mui.ajax(rooturl + 'api/dp/' + catagoryID + '/GetdpsNewBydptype'+'?$top='+perPageNumbers+'&$skip='+pageNumber, {
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -215,14 +214,13 @@
 		getNearShopsCatagory(catagoryID, page, locat, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			var url = rooturl + 'api/dp/' + catagoryID + '/GetdpsNearBydptype'
-			//			alert(url)
-			mui.ajax(rooturl + 'api/dp/' + catagoryID + '/GetdpsNearBydptype', {
-				data: {
-					location: locat,
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+			var url = rooturl + 'api/dp/' + catagoryID + '/GetdpsNearBydptype'+'?location='+locat+'&$top='+perPageNumbers+'&$skip='+pageNumber
+			mui.ajax(url, {
+//				data: {
+//					location: locat,
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -230,12 +228,10 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					//					alert(1)
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					//					alert(2)
 					console.log(type);
 					err()
 				}
@@ -244,13 +240,13 @@
 		getGoodsOfShop: function(dpid, suc, err) {
 			var perPageNumbers = 100;
 			var pageNumber = 0;
-			var url = rooturl + 'api/good/' + dpid + '/goods'
+			var url = rooturl + 'api/good/' + dpid + '/goods'+'?$top='+perPageNumbers+'&$skip='+pageNumber
 			console.log('请求地址:', url)
 			mui.ajax(url, {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -294,11 +290,9 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					alert(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(errorThrown)
 					err(errorThrown)
 				}
 			});
@@ -315,12 +309,10 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					alert(1)
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(2)
 					console.log(type);
 					err(errorThrown)
 				}
@@ -380,12 +372,10 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					//										alert(data)
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					//					alert(errorThrown)
 					console.log(type);
 					err(errorThrown)
 				}
@@ -406,12 +396,10 @@
 					'Content-Type': 'application/json'
 				},
 				success: function(data) {
-					alert(data)
 					console.log(data)
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					alert(errorThrown)
 					console.log(type);
 					err(errorThrown)
 				}
@@ -461,17 +449,35 @@
 				}
 			});
 		},
+		getAllMyCollection: function(token, suc, err) {
+			var perPageNumbers = 1000;
+			var pageNumber = 0 * 10;
+			var url = ceshiurl + 'api/client/Getdpshoucanglist?token=' + token+'&$top='+perPageNumbers+'&$skip='+pageNumber
+			console.log('获取我所有的收藏', url)
+			mui.ajax(ceshiurl + 'api/client/Getdpshoucanglist?token=' + token+'&$top='+perPageNumbers+'&$skip='+pageNumber, {
+				dataType: 'json', //服务器返回json格式数据
+				type: 'get', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log('dadwada',data)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},
 		getMyCollection: function(page, token, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			var url = ceshiurl + 'api/client/Getdpshoucanglist?token=' + token
-			console.log('wooca',url)
-//			alert(url)
-			mui.ajax(ceshiurl + 'api/client/Getdpshoucanglist?token=' + token, {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+			var url = ceshiurl + 'api/client/Getdpshoucanglist?token=' + token+'&$top='+perPageNumbers+'&$skip='+pageNumber;
+			console.log('woocaaaa', url)
+			mui.ajax(url, {
+
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -491,11 +497,11 @@
 		getMyOrderToShop: function(page, token, suc, err) {
 			var perPageNumbers = 10;
 			var pageNumber = page * 10;
-			mui.ajax(ceshiurl + 'api/client/Getshop_orderlist?token=' + token, {
-				data: {
-					$top: perPageNumbers,
-					$skip: pageNumber,
-				},
+			mui.ajax(ceshiurl + 'api/client/Getshop_orderlist?token=' + token+'&$top='+perPageNumbers+'&$skip='+pageNumber, {
+//				data: {
+//					$top: perPageNumbers,
+//					$skip: pageNumber,
+//				},
 				dataType: 'json', //服务器返回json格式数据
 				type: 'get', //HTTP请求类型
 				timeout: 10000, //超时时间设置为10秒；
@@ -512,6 +518,51 @@
 				}
 			});
 		},
+		addCollection: function(token, suc, err) {
+			var a =1
+			console.log('uli是',ceshiurl + 'api/client/Adddpshoucanglist?token='+token)
+			mui.ajax(ceshiurl + 'api/client/Adddpshoucanglist?token='+token, {
+//				data: {
+//					'1':1
+//				},                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data.meg)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		},           
+		deleteCollection:function(token, suc, err) {               
+			var a = 1
+			mui.ajax(ceshiurl + 'api/client/Deldpshoucanglist?token='+token, {
+//				data: {
+//					'1':1
+//				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'delete', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				success: function(data) {
+					console.log(data.meg)
+					suc(data)
+				},
+				error: function(xhr, type, errorThrown) {
+					console.log(type);
+					err(errorThrown)
+				}
+			});
+		}
 
 	}
 

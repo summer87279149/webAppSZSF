@@ -27,87 +27,89 @@
 					FastClick.attach(document.body);
 				}, false);
 			}
-		</script>
-	</head>
+		</script>  
+	</head>  
 
 	<body>
 		<div class="container" id="pullrefresh">
 			<div>
-			<div class="top">
-				<div class="img">
-					<img src="../../reaource/TanHaoDian.png" />
+				<div class="top">
+					<div class="img">
+						<img src="../../reaource/TanHaoDian.png" />
+					</div> 
+					<form @submit.prevent="searchClicked">
+						<div class="mui-input-row mui-search" id="searchView">
+							<input type="search" class="mui-input-clear" placeholder="" v-model="searchContent">
+							<input type="submit" name="" id="" value="" />
+							<div class="searchLeft">
+								<img src="../../reaource/searchLeft.png" />
+							</div>
+							<div class="searchRight">
+								<img src="../../reaource/serachRight.png" />
+							</div>
+						</div>
+					</form>
 				</div>
-				<form @submit.prevent="searchClicked">
-					<div class="mui-input-row mui-search" id="searchView">
-						<input type="search" class="mui-input-clear" placeholder="" v-model="searchContent">
-						<input type="submit" name="" id="" value="" />
-						<div class="searchLeft">
-							<img src="../../reaource/searchLeft.png" />
-						</div>
-						<div class="searchRight">
-							<img src="../../reaource/serachRight.png" />
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="Banner">
-				<img src="../../reaource/HaoDianBanner.png" />
-			</div>
-
-			<div class="mui-content">
-				<div id="slider" class="mui-slider ">
-					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-
-						<div class="mui-scroll">
-							<a class="mui-control-item mui-active" @click="pushToCatagory(0,0)">
-								全部
-							</a>
-							<a class="mui-control-item " @click="pushToCatagory(1,0)">
-								漆器
-							</a>
-							<a class="mui-control-item " @click="pushToCatagory(2,0)">
-								玉器
-							</a>
-							<a class="mui-control-item " @click="pushToCatagory(3,0)">
-								琴筝
-							</a>
-							<a class="mui-control-item " @click="pushToCatagory(4,0)">
-								盆景
-							</a>
-							<a class="mui-control-item " @click="pushToCatagory(5,0)">
-								厨艺
-							</a>
-							<a class="mui-control-item" @click="pushToCatagory(6,0)">
-								足艺
-							</a>
-							<a class="mui-control-item" @click="pushToCatagory(7,0)">
-								剪纸
-							</a>
-							<a class="mui-control-item" @click="pushToCatagory(8,0)">
-								刺绣
-							</a>
-						</div> 
-					</div>
-
+				<div class="Banner">
+					<img src="../../reaource/HaoDianBanner.png" />
 				</div>
-			</div>
-			<div class="bottom">
-				<ul id="listView">
-					<!--{{cellArr}}-->
-					<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
-						<div class='left'><img :src="dealFMImg(item.fmimg)" /></div>
-						<div class='right'><b>{{item.dpname}}</b>
-							<p>服务热线:{{item.tel}}</p>
-							<p>门店地址:{{item.address}}</p>
-							<p>经营范围：{{item.jyfw}}</p>
-						</div>
-					</li>
-				</ul>
 
-			</div>
+				<div class="mui-content">
+					<div id="slider" class="mui-slider ">
+						<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+
+							<div class="mui-scroll">
+								<a class="mui-control-item mui-active" @click="pushToCatagory(0,0)">
+									全部
+								</a>
+								<a class="mui-control-item " @click="pushToCatagory(1,0)">
+									漆器
+								</a>
+								<a class="mui-control-item " @click="pushToCatagory(2,0)">
+									玉器
+								</a>
+								<a class="mui-control-item " @click="pushToCatagory(3,0)">
+									琴筝
+								</a>
+								<a class="mui-control-item " @click="pushToCatagory(4,0)">
+									盆景
+								</a>
+								<a class="mui-control-item " @click="pushToCatagory(5,0)">
+									厨艺
+								</a>
+								<a class="mui-control-item" @click="pushToCatagory(6,0)">
+									足艺
+								</a>
+								<a class="mui-control-item" @click="pushToCatagory(7,0)">
+									剪纸
+								</a>
+								<a class="mui-control-item" @click="pushToCatagory(8,0)">
+									刺绣
+								</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="bottom">
+					<ul id="listView">
+						<!--{{cellArr}}-->
+						<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
+							<div class='left'><img :src="dealFMImg(item.fmimg)" /></div>
+							<div class='right'><b>{{item.dpname}}</b>
+								<p>服务热线:{{item.tel}}</p>
+								<p>门店地址:{{item.address}}</p>
+								<p>经营范围：{{item.jyfw}}</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="noItemsHint" v-show="cellArr.length===0">
+					该分类暂无商品
+				</div>
 			</div>
 			<!--<div class="mui-content" id="loading" style="background: rgba( 169, 169, 169, 0.5);position: absolute;left: 0;right: 0;top: 0;bottom: 0; z-index: 10000;" v-show="isLoading===true"><span style="text-align: center; line-height: 100%;position: absolute;top:45%;left: 50%;color: gray;transform:translateX(-50%);">加载中...</span></div>-->
-			
+
 		</div>
 		<script src="../../js/request.js"></script>
 		<script type="text/javascript">
@@ -141,10 +143,10 @@
 				data: {
 					isLoading: true,
 					searchContent: '',
-					currentShopsType: 0, 
+					currentShopsType: 0,
 					page: 0,
 					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII=',
-					cellArr: [{},{}]
+					cellArr: []
 
 				},
 				methods: {
@@ -160,12 +162,12 @@
 					},
 					cellClicked(shopId) {
 						var sid = shopId.toString()
-//						alert(sid)
-						this.pushto('../Home/TecDetail.html', "分类店铺",{
-							shopId:sid
+						//						alert(sid)
+						this.pushto('../Home/TecDetail.html', "分类店铺", {
+							shopId: sid
 						});
 					},
-					
+
 					pushto(id, title, params) {
 						var a = Math.random().toString();
 						var b = Math.random().toString();
@@ -197,8 +199,8 @@
 						}
 						this.currentShopsType = catagory;
 						var that = this
-//						alert(this.page)
-//						alert(this.currentShopsType)
+						//						alert(this.page)
+						//						alert(this.currentShopsType)
 						console.log('当前page:', this.page, '类别:', this.currentShopsType)
 						httprequest.getHotShopsCatagory(this.currentShopsType, page, function(data) {
 							that.isLoading = false
@@ -207,10 +209,10 @@
 								//								alert(item.dpname)
 								that.cellArr.push(item)
 							})
-//							that.cellArr=[]   
+							//							that.cellArr=[]   
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						}, function(err) {
-//							alert(2)
+							//							alert(2)
 							that.isLoading = false
 							console.log('错误是140行', err)
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
@@ -218,11 +220,11 @@
 					},
 					pushToCatagory(catagory, page) {
 						this.getHotShops(catagory, page)
-					},
+					}, 
 					pullupRefresh() {
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						this.page++
-						this.getHotShops(this.currentShopsType,this.page)
+							this.getHotShops(this.currentShopsType, this.page)
 					},
 					pulldownRefresh() {
 						this.getHotShops(this.currentShopsType, 0)

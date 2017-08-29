@@ -64,8 +64,9 @@
 							<span>上午{{swtime}}晚上{{xwtime}}</span>
 						</div>
 
-						<div class="right">
-							<img src="../../reaource/sc.png" />
+						<div class="right" v-show="isLogin" @click="collect">
+							<img src="../../reaource/sc.png" v-show="!isCollected" />
+							<img src="../../reaource/sc2.png" v-show="isCollected" />
 							<span>{{sc}}人收藏</span>
 						</div>
 
@@ -86,26 +87,26 @@
 					<div class="mui-card-header">本店介绍</div>
 
 					<li class="mui-table-view-cell" v-for="item in imgUrlArr">
-						<img :src="item" data-preview-src="" data-preview-group="2"/>
+						<img :src="item" data-preview-src="" data-preview-group="2" />
 					</li>
-				</ul> 
+				</ul>
 			</div>
-			<!--商品--> 
+			<!--商品-->
 			<div class="mui-content goods" id="goods" style="background-color:#fff" v-show="goodsArr.length!==0">
-				<span >同城购物，到店付款，您买的更放心</span>
+				<span>同城购物，到店付款，您买的更放心</span>
 				<ul class="mui-table-view mui-grid-view">
 					<li class="mui-table-view-cell mui-media mui-col-xs-6" v-for="item in goodsArr" @click="cellClicked(item.id)">
-							<img class="mui-media-object" src="'http://szsf.vxiaoxiao.com/'+item.fmimg">
-							<div class="mui-media-body">{{item.pname}}</div>
-							<div class="goShopPrice">到店价:{{item.price}}</div>
-							<div class="shopPrice">门店价:{{item.scprice}}</div>
+						<img class="mui-media-object" src="'http://szsf.vxiaoxiao.com/'+item.fmimg">
+						<div class="mui-media-body">{{item.pname}}</div>
+						<div class="goShopPrice">到店价:{{item.price}}</div>
+						<div class="shopPrice">门店价:{{item.scprice}}</div>
 					</li>
-				</ul>  
+				</ul>
 			</div>
-   
+
 			<div class="mui-content" id="loading" style="position: absolute;left: 0;right: 0;top: 0;bottom: 0; z-index: 10000;" v-show="shopid.length==0"></div>
 		</div>
- 		<script src="../../js/mui.picker.js"></script>
+		<script src="../../js/mui.picker.js"></script>
 		<script src="../../js/mui.poppicker.js"></script>
 		<script src="../../js/mui.zoom.js"></script>
 		<script src="../../js/mui.previewimage.js"></script>
@@ -113,13 +114,15 @@
 			mui.previewImage();
 		</script>
 		<script type="text/javascript">
-			mui.init({ 
+			mui.init({
 				swipeBack: true, //启用右滑关闭功能,
 			});
 
 			var app2 = new Vue({
 				el: ".container",
 				data: {
+					isLogin: false,
+					isCollected: false,
 					isSupported: false,
 					shopid: '',
 					name: '',
@@ -133,11 +136,33 @@
 					zhekou: '',
 					renqi: '',
 					contents: '',
-					goodsArr:[],
+					goodsArr: [],
 					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
 				},
 				methods: {
-					cellClicked(cellId){
+					collect() {
+						var that = this
+						var token = plus.storage.getItem('szsftoken');
+						if(this.isCollected) {
+							//							alert('shanchu')
+							httprequest.deleteCollection(token, function(res) {
+								plus.nativeUI.toast('取消收藏');
+								that.isCollected = false
+							}, function(err) {
+
+							})
+						} else {
+							//							alert('shoucang')
+							httprequest.addCollection(token, function(res) {
+								plus.nativeUI.toast('收藏成功');
+								that.isCollected = true
+							}, function(err) {
+
+							})
+						}
+
+					},
+					cellClicked(cellId) {
 						/*显示选择框
 						 * var that = this
 						var userPicker = new mui.PopPicker();
@@ -160,21 +185,21 @@
 									break;
 							}
 						});*/
-						this.pushto('BuyGoods.html','商品详情',{
-							goodsId:cellId,
-							keFuDianHua:this.phone
+						this.pushto('BuyGoods.html', '商品详情', {
+							goodsId: cellId,
+							keFuDianHua: this.phone
 						})
 					},
 					addPopularity() {
 						this.isSupported = true
 						httprequest.addVisitNumber(this.shopid)
 					},
-					pushto(id, title,params) {
+					pushto(id, title, params) {
 						var a = Math.random().toString();
 						var b = Date.parse(new Date()).toString();
 						mui.openWindowWithTitle({
 							url: id,
-							id: id+a+b,
+							id: id + a + b,
 							extras: params,
 							styles: {
 								top: '0px', //新页面顶部位置 
@@ -190,9 +215,32 @@
 								}
 							}
 						})
-						
 
-						
+					},
+					getIsCollected() {
+						if(this.isLogin) {
+							var foo = plus.storage.getItem('szsftoken');
+							var that = this
+							httprequest.getAllMyCollection(foo, function(res) {
+								res.forEach(function(item) {
+//									alert(item.dpid)
+//									alert(that.shopid)
+									if(item.dpid == that.shopid) {
+										that.isCollected = true
+									}
+								});
+							}, function(err) {
+
+							})
+						}
+					},
+					getIsLogin() {
+						var foo = plus.storage.getItem('szsftoken');
+						if(foo == null) {
+							this.isLogin = false
+						} else {
+							this.isLogin = true
+						}
 					}
 				},
 				computed: {
@@ -201,22 +249,24 @@
 						if(this.contents.length === 0) {
 							return ''
 						} else {
-							var regExp = /[src=\\"]{5}[^\s]*/g;
+//							var regExp = /[src=\\"]{5}[^\s]*/g;
+							var regExp = /(\/.*?\.\w{3})/g
 							var arr = this.contents.match(regExp)
 							for(var i = 0; i < arr.length; ++i) {
-								arr[i] = arr[i].substring(6, arr[i].length - 1)
-								arr[i] = "http://szsf.vxiaoxiao.com/" + arr[i]
+//								arr[i] = arr[i].substring(6, arr[i].length - 1)
+								arr[i] = "http://szsf.vxiaoxiao.com" + arr[i]
 							}
 							return arr
 						}
 					}
 				},
 				mounted() {
+					//
 					var that = this
 					var self = plus.webview.currentWebview();
-					var shopId = self.shopId;//拿到传值
-					console.log('拿到的shopid是',shopId)
-					httprequest.getDetail(shopId,function(data) {
+					var shopId = self.shopId; //拿到传值
+					console.log('拿到的shopid是', shopId)
+					httprequest.getDetail(shopId, function(data) {
 						that.name = data.dpname
 						that.phone = data.tel
 						that.banner = data.shareimg
@@ -229,14 +279,18 @@
 						that.renqi = data.dj
 						that.contents = data.contents
 						that.shopid = data.id.toString()
+						//登入？=>判断是否收藏
+						that.getIsLogin()
+						that.getIsCollected()
 					})
-					httprequest.getGoodsOfShop(shopId,function(res){
-						console.log('商品数组:',res)
-//						that.goodsArr = res
-						that.goodsArr = [{},{}]
-					},function(err){
+					httprequest.getGoodsOfShop(shopId, function(res) {
+						console.log('商品数组:', res)
+						//						that.goodsArr = res
+						that.goodsArr = []
+					}, function(err) {
 						that.goodsArr = []
 					})
+
 				},
 				watch: {}
 			})
@@ -246,7 +300,8 @@
 		if('addEventListener' in document) {
 			document.addEventListener('DOMContentLoaded', function() {
 				FastClick.attach(document.body);
-			}, false);}
+			}, false);
+		}
 	</script>
 
-</html> 
+</html>

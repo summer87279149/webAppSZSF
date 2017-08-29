@@ -1,0 +1,147 @@
+@import "../common.less";
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: url(../../reaource/bg.jpg) no-repeat border-box fixed;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    .top {
+        .portrait {
+            height: 110px;
+            .left {
+                padding: 0;
+                margin: 5px;
+                img {
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50px;
+                }
+            }
+            .right {
+                margin-top: 5px;
+                margin-left: 120px;
+                .name {
+                    color: #47342f;
+                }
+                .zhiye {
+                    color: #47342f;
+                    margin-left: 10px;
+                    font-size: 12px;
+                }
+                .jingyan {
+                    color: #47342f;
+                    margin-top: 10px;
+                }
+                .left2 {
+                    margin-top: 10px;
+                    display: inline-block;
+                    .icon {
+                        width: 12px;
+                    }
+                    span {
+                        color: #47342f;
+                        margin-left: 5px;
+                        font-size: 13px;
+                    }
+                }
+                .right2 {
+                    margin-top: 10px;
+                    float: right;
+                    margin-right: 20px;
+                    display: inline-block;
+                    .icon {
+                        width: 12px;
+                    }
+                    span {
+                        color: #47342f;
+                        margin-left: 3px;
+                        font-size: 13px;
+                    }
+                }
+                p {
+                    color: #47342f;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 13px;
+                    .textLine(2);
+                }
+            }
+        }
+    }
+    .info {
+        padding: 10px 25px 10px 25px;
+        .zi {
+            margin: 0 auto;
+            p {
+                color: #47342f;
+            }
+        }
+        .topLine {
+            background-color: #47342f;
+            height: 1px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+        .bottomLine {
+            background-color: #47342f;
+            height: 1px;
+            margin: 0 auto;
+        }
+    }
+    .xiangmu {
+        .title {
+            margin-left: 5%;
+            font-size: 17px;
+            color: #a09659;
+        }
+        ul {
+            padding: 0;
+            .noItemsHint {
+                font-size: 13px;
+                color: gray;
+                text-align: center;
+//              position: absolute;
+               
+                margin: auto;
+            }
+            .cell {
+                margin-left: 5%;
+                width: 100%;
+                list-style: none;
+                .cellLeft {
+                    img {
+                        float: left;
+                        width: 100px;
+                        border-radius: 10px;
+                    }
+                }
+                .cellRight {
+                    margin-left: 120px;
+                    .xiangmutitle {
+                        color: #47342f;
+                        font-size: 15px;
+                    }
+                    .pinfen {
+                        margin-top: 10px;
+                        color: #605948;
+                    }
+                    .juti {
+                        margin-top: 10px;
+                        color: #605948;
+                    }
+                }
+                .line {
+                    margin-top: 5px;
+                    height: 1px;
+                    background-color: #47342f;
+                    width: 90%;
+                    margin-right: 5%;
+                }
+            }
+        }
+    }
+}
