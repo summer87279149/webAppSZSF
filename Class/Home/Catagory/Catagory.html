@@ -36,7 +36,7 @@
 					<div class="img">
 						<img src="../../../reaource/TanHaoDian.png" />
 					</div>
-
+ 
 					<form @submit.prevent="searchClicked2">
 						<div class="mui-input-row mui-search" id="searchView">
 							<input type="search" class="mui-input-clear" placeholder="" v-model="searchContent">
@@ -129,7 +129,6 @@
 						return 'http://szsf.vxiaoxiao.com/' + fmimg
 					},
 					searchClicked2() {
-						//						alert(this.searchContent)
 						this.pushto('../SearchResult.html', "搜索结果", {
 							content: this.searchContent
 						});
@@ -142,19 +141,14 @@
 						}
 						this.currentShopsType = 0;
 						var that = this
-						console.log('当前page:', this.page, '类别:', this.shopCatagory)
 						httprequest.getHotShopsCatagory(this.shopCatagory, page, function(data) {
 							that.isLoading = false
-							console.log('是',data)
 							data.forEach(function(item) {
-//								alert(item.dpname)
 								that.cellArr.push(item)
 							})
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						}, function(err) {
-							alert(2)
 							that.isLoading = false
-							console.log('错误是140行', err)
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						})
 					},
@@ -204,6 +198,7 @@
 						}, function(e) {
 							that.isLoading = false
 							alert('地理位置错误: ' + e.message);
+//							plus.nativeUI.alert( e.message, alertCB, title, buttonCapture );
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 						});
 
@@ -282,6 +277,7 @@
 					var self = plus.webview.currentWebview();
 					this.shopCatagory = self.shopCatagory; //拿到传值
 					this.getHotShops(0)
+					
 				}
 			})
 		</script>

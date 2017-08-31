@@ -7,7 +7,7 @@
 	"id": "com.ldwl.NewShenZhouShiFu",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "神州师傅",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.0",/*应用版本名称*/
+		"name": "1.0.3",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "一款查看扬州特色技艺、如玉器，琴筝的app",/*应用描述信息*/
@@ -21,23 +21,23 @@
 		"url": "http://www.dcloud.io"
 	},
 	"permissions": {
-		
-		
+
+
 		"Cache": {
 			"description": "管理应用缓存"
 		},
-		
+
 		"Console": {
 			"description": "跟踪调试输出日志"
 		},
-		
-		
-		
+		"Maps": {},
+
+
 		"Events": {
 			"description": "应用扩展事件"
 		},
-		
-		
+
+
 		"Geolocation": {
 			"description": "访问位置信息"
 		},
@@ -45,15 +45,9 @@
 			"description": "使用Native.js能力"
 		},
 
-		"Orientation": {
-			"description": "访问方向感应器"
-		},
-		"Proximity": {
-			"description": "访问距离感应器"
-		},
-		"Storage": {
-			"description": "管理应用本地数据"
-		},
+
+
+
 
 		"Uploader": {
 			"description": "管理文件上传任务"
@@ -64,9 +58,9 @@
 		"XMLHttpRequest": {
 			"description": "跨域网络访问"
 		},
-		
-		
-		
+
+
+
 		"Speech": {
 			"description": "管理语音识别插件"
 		},
@@ -78,6 +72,36 @@
 		},
 		"Navigator": {
 			"description": "浏览器信息"
+		},
+		"Camera": {
+			"description": "获取相机权限"
+		},
+		"Gallery": {
+			"description": "获取相册权限"
+		},
+		"Push": {
+			"description": "获取推送权限"
+		},
+		"File": {
+			"description": "获取文件权限"
+		},
+		"Audio": {
+			"description": "获取音视频权限"
+		},
+		"Device": {
+			"description": "获取设备信息"
+		},
+		"NativeObj": {
+			"description": "获取原生对象"
+		},
+		"Storage": {
+			"description": "获取存储权限"
+		},
+		"Contacts": {
+			"description": "获取通讯录权限"
+		},
+		"Accelerometer": {
+			"description": "获取加速度传感器权限"
 		}
 	},
 	"plus": {
@@ -88,6 +112,23 @@
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
+			"plugins": {
+				"maps": {
+					"baidu": {
+						"appkey_ios": "HLWImq56ng6HWwqme47ZGcDhTKUEQpc0",
+						"appkey_android": "1XLHl28zF8dkOm6WcNoQvGKnkBGt6IRd",
+						"appkey": "",
+						"description": "地图"
+					}
+				},
+				"push": {
+					"igexin": {
+						"appid": "pjPKJTvf8n7GnjpPDMXZK8",
+						"appkey": "aWFgKbL8cO9kw1jLU2AXB1",
+						"appsecret": "92nhObyKY7AnJboNqbHbg4"
+					}
+				}
+			},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -101,7 +142,36 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.GET_TASKS\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
+					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_SMS\"/>"
+				]
 			},
 			"orientation": [
 				"portrait-primary"
@@ -115,7 +185,7 @@
 						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
 						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
 						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "unpackage/res/icons/58x58.png", 
+						"spotlight-retina": "unpackage/res/icons/58x58.png",
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
 						"settings-retina": "unpackage/res/icons/58x58.png",

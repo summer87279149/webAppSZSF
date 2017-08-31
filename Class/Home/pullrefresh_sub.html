@@ -55,8 +55,13 @@
 					<div class="mui-slider-group mui-slider-loop" id="slider2">
 						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 						<div class="mui-slider-item mui-slider-item-duplicate">
-							<a >
-								<img src="../../reaource/ceshi1.jpg" data-preview-src="" data-preview-group="1">
+							<a>
+								<img src="../../reaource/ceshi1.png" data-preview-src="" data-preview-group="1">
+							</a>
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a>
+								<img src="../../reaource/ceshi1.png" data-preview-src="" data-preview-group="1">
 							</a>
 						</div>
 						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
@@ -70,49 +75,49 @@
 				<div class="mid">
 					<ul class="mui-table-view mui-grid-view mui-grid-9">
 						<li @click="pushToCatagory(1)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/3.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">漆器</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(2)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/7.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">玉器</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(3)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/6.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">琴筝</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(4)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/13.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">盆景</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(5)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/9.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">厨艺</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(6)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/14.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">脚艺</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(7)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/10.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">剪纸</div>
 							</a>
 						</li>
 						<li @click="pushToCatagory(8)" class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
-							<a >
+							<a>
 								<img class="mui-icon mui-icon-location" src="../../reaource/5.png" style="width: 40px;height: 40px;">
 								<div class="mui-media-body">刺绣</div>
 							</a>
@@ -142,9 +147,11 @@
 										活动
 									</a>
 								</div>
+
 							</div>
 						</div>
 					</div>
+					<!--{{aa}}-->
 					<ul id="listView">
 						<!--{{cellArr}}-->
 						<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
@@ -162,7 +169,7 @@
 			</div>
 		</div>
 		<script src="../../js/request.js"></script>
-			<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.zoom.js"></script>
 		<script src="../../js/mui.previewimage.js"></script>
 		<script>
 			mui.previewImage();
@@ -193,9 +200,11 @@
 			function pullupRefresh() {
 				app2.pullupRefresh()
 			}
+			
 			var app2 = new Vue({
 				el: "#pullrefresh",
 				data: {
+//					aa: 'daddwedwe',
 					searchContent: '',
 					currentShopsType: 0, //当前选择的类型 热门：0，新人：1，附近：2
 					page: 0,
@@ -203,16 +212,17 @@
 					cellArr: []
 
 				},
-				methods: { 
-					pushToCatagory(e){
-						this.pushto('Catagory/Catagory.html', "分类店铺",{
-							shopCatagory:e.toString()
+				methods: {
+					pushToCatagory(e) {
+						//						this.pushto('Maps.html', "分类店铺", {
+						this.pushto('Catagory/Catagory.html', "分类店铺", {
+							shopCatagory: e.toString()
 						});
 					},
 					searchClicked() {
-//页面传值
-						this.pushto('SearchResult.html', "搜索结果",{
-							content:this.searchContent
+						//页面传值
+						this.pushto('SearchResult.html', "搜索结果", {
+							content: this.searchContent
 						});
 
 					},
@@ -234,11 +244,11 @@
 								that.cellArr.push(item)
 							})
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(); 
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						}, function(err) {
 							console.log('错误是', err)
 							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
-							mui('#pullrefresh').pullRefresh().endPullupToRefresh(); 
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						})
 					},
 					getNewShops(page) {
@@ -303,11 +313,12 @@
 							case 2:
 								this.page++
 									this.getNearShops(this.page)
-								break; 
+								break;
 							case 3:
 								break;
 						}
 					},
+
 					pulldownRefresh() {
 						switch(this.currentShopsType) {
 							case 0:
@@ -324,8 +335,9 @@
 						}
 					},
 					cellClicked(shopId) {
-						this.pushto('TecDetail.html', "分类店铺",{
-							shopId:shopId.toString()
+						this.pushto('TecDetail.html', "分类店铺", {
+
+							shopId: shopId.toString()
 						});
 					},
 					pushto(id, title, params) {
@@ -350,7 +362,7 @@
 							}
 						})
 
-					}	
+					}
 				},
 				computed: {
 
@@ -360,6 +372,14 @@
 				},
 				mounted() {
 					this.getHotShops(0)
+					//					plus.nativeUI.alert('message', function() {
+					//						console.log("User pressed!");
+					//					}, "nativeUI", "OK");
+					//					plus.nativeUI.showWaiting();
+					//					plus.nativeUI.closeWaiting();
+					//					plus.nativeUI.toast( message, options );
+					
+
 				}
 
 			})

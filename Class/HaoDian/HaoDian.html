@@ -27,8 +27,8 @@
 					FastClick.attach(document.body);
 				}, false);
 			}
-		</script>  
-	</head>  
+		</script>
+	</head>
 
 	<body>
 		<div class="container" id="pullrefresh">
@@ -36,7 +36,7 @@
 				<div class="top">
 					<div class="img">
 						<img src="../../reaource/TanHaoDian.png" />
-					</div> 
+					</div>
 					<form @submit.prevent="searchClicked">
 						<div class="mui-input-row mui-search" id="searchView">
 							<input type="search" class="mui-input-clear" placeholder="" v-model="searchContent">
@@ -92,8 +92,12 @@
 					</div>
 				</div>
 				<div class="bottom">
+
 					<ul id="listView">
-						<!--{{cellArr}}-->
+						<!--{{cellArr}}-->  
+						<li class="noItemsHint" v-show="cellArr.length===0">
+							该分类暂无商品
+						</li>
 						<li @click="cellClicked(item.id)" class="cellItem" v-for="(item,index) in cellArr">
 							<div class='left'><img :src="dealFMImg(item.fmimg)" /></div>
 							<div class='right'><b>{{item.dpname}}</b>
@@ -104,9 +108,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="noItemsHint" v-show="cellArr.length===0">
-					该分类暂无商品
-				</div>
+
 			</div>
 			<!--<div class="mui-content" id="loading" style="background: rgba( 169, 169, 169, 0.5);position: absolute;left: 0;right: 0;top: 0;bottom: 0; z-index: 10000;" v-show="isLoading===true"><span style="text-align: center; line-height: 100%;position: absolute;top:45%;left: 50%;color: gray;transform:translateX(-50%);">加载中...</span></div>-->
 
@@ -163,7 +165,7 @@
 					cellClicked(shopId) {
 						var sid = shopId.toString()
 						//						alert(sid)
-						this.pushto('../Home/TecDetail.html', "分类店铺", {
+						this.pushto('../Home/TecDetail.html', "店铺", {
 							shopId: sid
 						});
 					},
@@ -220,7 +222,7 @@
 					},
 					pushToCatagory(catagory, page) {
 						this.getHotShops(catagory, page)
-					}, 
+					},
 					pullupRefresh() {
 						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
 						this.page++

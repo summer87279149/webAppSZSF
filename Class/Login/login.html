@@ -273,6 +273,7 @@
 							return
 						} else {
 							httprequest.login(this.tel, this.pwd, function(res) {
+								
 								if(res.res === 'OK') {
 									plus.storage.setItem('szsftoken', res.token);
 									//									alert(res.token)

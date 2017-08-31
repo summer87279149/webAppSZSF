@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title></title>
+		<!--引入vue-->
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!--引入mui-->
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<!--引入less-->
+		<link rel="stylesheet" type="text/less" href="../../css/WoDe/personInfo.less" />
+		<script src="../../js/less.js" type="text/javascript"></script>
+		<!--引入fastclick-->
+		<script type='application/javascript' src='../../js/fastclick.js'></script>
+		<script type="text/javascript">
+			if('addEventListener' in document) {
+				document.addEventListener('DOMContentLoaded', function() {
+					FastClick.attach(document.body);
+				}, false);
+			}
+		</script>
+
+		<style type="text/css">
+			#container {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+			
+			#map {
+				width: 100%;
+				position: absolute;
+				top: 0px;
+				bottom: 50px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+				z-index: 1;
+			}
+			
+			#btn {
+				position: absolute;
+				bottom: 0px;
+				z-index: 1000;
+				width: 100%;
+				height: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="map">
+				地图加载中...
+			</div>
+			<button type="button" id="btn" class="mui-btn" @click="yuanshengdaohang">使用原生地图导航</button>
+		</div>
+
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能,
+
+			});
+			var map = null;
+			var marker = null;
+			var app2 = new Vue({
+				el: "#container",
+				data: {
+					jifen: "111",
+					base64Data: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAb1BMVEUAAAAAev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8Aev8AAACubimgAAAAI3RSTlMAGfUTGfQTGPMSGPIYGhgaGBsXGxcbFxwXHBccFhwWHRYdHWufDPQAAAABYktHRACIBR1IAAAAB3RJTUUH4QETEBwooeTlkQAAAJVJREFUSMft1EkSgkAQRNFGUXFWHBDBibr/HTUwD5B/48Ig1y+io7u6MqUhf5hsNEY+j5hMgZ/FJ8Xc9ovos3T96utjbfqN/Nb0O/m96Uv5g+mP8ifTn+Ur01/ka9Nf5RvTt/I309/lH6Z/yr9Mn+Q71/MT8B34K/E58Enzv8R/K98HvnF8p3lr8F7izce7lbf3kJ/lDQp9HdBhgg3PAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTAxLTE5VDE2OjI4OjQwKzA4OjAwpTDFwQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wMS0xOVQxNjoyODo0MCswODowMNRtfX0AAAAASUVORK5CYII='
+
+				},
+				methods: {
+					yuanshengdaohang() {
+						// 设置目标位置坐标点和其实位置坐标点
+						var dst = new plus.maps.Point(116.39131928, 39.90793074); // 天安门 
+						var src = new plus.maps.Point(116.335, 39.966); // 大钟寺
+						// 调用系统地图显示 
+						plus.maps.openSysMap(dst, "天安门", src);
+
+					},
+					// 获取用户的当前位置信息
+					getUserLocation(cb) {
+						map.getUserLocation(function(state, point) {
+							if(0 == state) {
+								//								alert(JSON.stringify(point));
+								cb(point)
+							} else {
+								alert("请打开定位授权!");
+							}
+						});
+					},
+					// 添加标点
+					addMarker() {
+						if(marker) {
+							return;
+						}
+						marker = new plus.maps.Marker(new plus.maps.Point(116.347496, 39.970191));
+						marker.setIcon("../../reaource/city_locating_frame3.png");
+						marker.setLabel("终点店铺位置");
+						var bubble = new plus.maps.Bubble("打造最好的HTML5移动开发工具");
+						marker.setBubble(bubble);
+						map.addOverlay(marker);
+					},
+					// 打开用户位置
+					showUserLocation() {
+						map.showUserLocation(true);
+					},
+					// 关闭用户位置
+					hideUserLocation() {
+						map.showUserLocation(false);
+					},
+					setCenter(point) {
+						//						var center = new plus.maps.Point(118.123, 35.456);
+						map.setCenter(point);
+					},
+					pushto(id, title, params) {
+						var a = Math.random().toString();
+						var b = Date.parse(new Date()).toString();
+						mui.openWindowWithTitle({
+							url: id,
+							id: id + a + b,
+							extras: params,
+							styles: {
+								top: '0px', //新页面顶部位置 
+								bottom: '0px', //新页面底部位置
+							},
+						}, {
+							title: { //标题配置
+								text: title, //标题文字
+							},
+							back: { //左上角返回箭头
+								image: {
+									base64Data: this.base64Data
+								}
+							}
+						})
+
+					}
+				},
+				computed: {
+
+				},
+				watch: {
+
+				},
+				mounted() {
+					var self = plus.webview.currentWebview();
+					var shopId = self.shopId; //拿到传值
+					var centerValue = new plus.maps.Point(118.123, 35.456);
+					map = new plus.maps.Map('map');
+					var that = this
+					this.getUserLocation(function(point) {
+						that.setCenter(point)
+					})
+					map.showZoomControls(true);
+					//					this.setCenter()
+					this.showUserLocation()
+					this.addMarker()
+
+				}
+			})
+		</script>
+	</body>
+
+</html>

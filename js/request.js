@@ -360,6 +360,7 @@
 		},
 		login: function(tel, pwd, suc, err) {
 			var url = ceshiurl + 'api/client/login'
+//			alert(url)
 			mui.ajax(url, {
 				data: {
 					Tel_No: tel,
@@ -376,7 +377,7 @@
 					suc(data)
 				},
 				error: function(xhr, type, errorThrown) {
-					console.log(type);
+					console.log('222',errorThrown);
 					err(errorThrown)
 				}
 			});
